@@ -16,23 +16,26 @@
 
     <?php
         if ($_SERVER['REQUEST_METHOD'] =="POST"){
+            if (!empty($_POST["fname"]) && !empty($_POST["email"]) && !empty($_POST["phone"])){
             $fname = $_POST['fname'];
             $email = $_POST['email'];
             $phone= $_POST['phone'];
             echo $fname . "<br />";
             echo $email . "<br />";
-            echo $phone . "<br />";
+            echo $phone . "<br />";    
+            }
+            
 
     }
     ?>
 
     <br><br>
-    
+
 <form class="" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
     <div>
         <label for="fname">Full Names:</label>
-        <input type="text" id="fname" name="fname" placeholder="Oriagi Oriagi Oriagi" required>
+        <input type="text" id="fname" name="fname" placeholder="Oriagi Oriagi Oriagi">
     </div>
    
 
@@ -41,7 +44,7 @@
 
     <div>
         <label for="email">Your Email:</label>
-        <input type="email" id="email" name="email" placeholder="nyamweya@fmail.com" required>
+        <input type="email" id="email" name="email" placeholder="nyamweya@fmail.com">
     </div>
 
     <br>
@@ -49,14 +52,14 @@
 
     <div>
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" placeholdereholder="254 769 696 969" required>
+        <input type="tel" id="phone" name="phone" placeholdereholder="254 769 696 969">
     </div>
 
     <br>
 
     <div>
         <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
+        <input type="date" id="date" name="date">
     </div>
 
     <br>
