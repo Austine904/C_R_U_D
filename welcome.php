@@ -12,10 +12,23 @@
     ?>
 
 
-    <br>
+    <br><br>
 
+    <?php
+        if ($_SERVER['REQUEST_METHOD'] =="POST"){
+            $fname = $_POST['fname'];
+            $email = $_POST['email'];
+            $phone= $_POST['phone'];
+            echo $fname . "<br />";
+            echo $email . "<br />";
+            echo $phone . "<br />";
 
-<form>
+    }
+    ?>
+
+    <br><br>
+    
+<form class="" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
     <div>
         <label for="fname">Full Names:</label>
@@ -43,7 +56,7 @@
 
     <div>
         <label for="date">Date:</label>
-        <input type="date" id="date" name="date">
+        <input type="date" id="date" name="date" required>
     </div>
 
     <br>
