@@ -11,28 +11,56 @@
         echo "Date is: " . date('j-m-y, h:i:s');
     ?>
 
-
     <br><br>
 
     <?php
         if ($_SERVER['REQUEST_METHOD'] =="POST"){
             if (!empty($_POST["fname"]) && !empty($_POST["email"]) && !empty($_POST["phone"])){
-            $fname = $_POST['fname'];
-            $email = $_POST['email'];
-            $phone= $_POST['phone'];
-            echo $fname . "<br />";
-            echo $email . "<br />";
-            echo $phone . "<br />";    
+                $fname = $_POST['fname'];
+                $email = $_POST['email'];
+                $phone = $_POST['phone'];
+                $date = $_POST['date'];
+
+                //Database connection
+                $db_server = "localhost";
+                $db_user ="root";
+                $db_pass = "";
+                $db_name = "oriagidb";
+                $conn = "";
+
+                $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
+
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
+                }
+                
+                if($conn){
+
+                                        
+                    $sql = "INSERT INTO bashdb(fname, email, phone, date) values(?, ?, ?, ?)";
+
+                    $stmt = $conn->prepare("INSERT INTO bashdb(fname, email, phone, date)
+                    values(?, ?, ?, ?)");
+                    $stmt->bind_param("ssii",$fname, $email, $phone, $date);
+                     if ($stmt->execute()) {
+                        echo "Registration Successful";
+                    } else {
+                        echo "Error: " . $stmt->error;
+                    }
+                    $stmt->close();
+                    $conn->close();
+                }
+                else{
+                    echo"Registration Unsuccessful";
+                }
             }
+        }
+    ?>
             
 
-    }
-    ?>
-
-    <br><br>
-
-<form class="" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-
+    
+    <form class="" action="#" method="post">
+        
     <div>
         <label for="fname">Full Names:</label>
         <input type="text" id="fname" name="fname" placeholder="Oriagi Oriagi Oriagi">
@@ -52,7 +80,7 @@
 
     <div>
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" placeholdereholder="254 769 696 969">
+        <input type="tel" id="phone" name="phone" placeholder="254 769 696 969">
     </div>
 
     <br>
@@ -67,7 +95,8 @@
 
     <div>
         <input type="submit">
-    </div>
+    </div> 
+ 
 </form>
 </body>
 </html>
