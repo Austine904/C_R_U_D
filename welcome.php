@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
+<body style="margin: 50px;">
     <?php
         echo "hello Oriagi<br>\n";
         echo "Date is: " . date('j-m-y, h:i:s');
@@ -99,7 +100,7 @@
 
     <h1>List Of Bash Goers</h1>
     <br>
-    <Table>
+    <Table class="table">
         <thread>
             <tr>
             <th>ID</th>
