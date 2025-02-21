@@ -107,6 +107,7 @@
             <th>email</th>
             <th>phone</th>
             <th>Date</th>
+            <th>Delete</th>
             </tr>
         </thread>
 
@@ -121,29 +122,37 @@
              $conn = mysqli_connect($db_server, $db_user, $db_pass, $db_name);
 
              if (!$conn) {
-                die("Connection failed: " . $conn->mysqli_connect_error);
+                die("Connection failed: " . mysqli_connect_error());
              }
             
-             if($conn){
+                if($conn){
+                    if (isset($_GET["ID"])){
+                        $ID=$_GET["ID"];
+                        $Delete= mysqli_query($conn, "DELETE FROM bashdb WHERE ID = '$ID'" );
+                    }
 
-                //read db data
-                $sql = "SELECT * FROM bashdb";
-                $result = $conn->query($sql);
+                    //read db data
+                    $sql = "SELECT * FROM bashdb";
+                    $result = $conn->query($sql);
 
-                if (!$result){
-                    die("invalid querry: " . $conn->error);
+                    if (!$result){
+                        die("invalid querry: " . $conn->error);
+                    }
+
+                    // read data of each row
+                    while($row = $result->fetch_assoc()){
+                        echo "<tr>
+                            <td>".$row["ID"]."</td>
+                            <td>".$row["fname"]."</td>
+                            <td>".$row["email"]."</td>
+                            <td>".$row["phone"]."</td>
+                            <td>".$row["date"]."</td>
+                            <td>
+                                <a href = 'welcome.php?ID= ".$row["ID"]."'>Delete</a>
+                        </tr>";
+                    }
                 }
-
-                // read data of each row
-                while($row = $result->fetch_assoc()){
-                    echo "<tr>
-                    <td>" . $row["id"] . "</td>
-                    <td>" . $row["fname"] . "</td>
-                    <td>" . $row["email"] . "</td>
-                    <td>" . $row["phone"] . "</td>
-                    <td>" . $row["date"] . "</td>
-                   </tr>";
-                }
+            ?>
         </tbody>
     </Table>
 </body>
