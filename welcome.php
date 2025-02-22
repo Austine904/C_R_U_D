@@ -109,6 +109,7 @@
             <th>phone</th>
             <th>Date</th>
             <th>Delete</th>
+            <th>Update</th>
             </tr>
         </thread>
 
@@ -148,8 +149,8 @@
                             <td>".$row["email"]."</td>
                             <td>".$row["phone"]."</td>
                             <td>".$row["date"]."</td>
-                            <td>
-                                <a href = 'welcome.php?ID= ".$row["ID"]."'>Delete</a>
+                            <td><a href = 'welcome.php?ID= ".$row["ID"]."' class = 'btn btn-danger' >Delete</a>
+                            <td> <a href ='Update.php?ID=".$row["ID"]."' class = 'btn btn-success'>Update</a></td>
                         </tr>";
                     }
                 }
